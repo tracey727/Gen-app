@@ -1,1 +1,94 @@
-RESTORE_CONTEXT: Genevieve App Master Build Phase 1 Locked. System Name: Genevieve (Trademark Pending). Core Architecture: Safety & Compatibility System for Australian dog owners. Core Nine-Screen Layout Framework fully designed, cross-linked, mathematically audited for non-breaking execution loop protection, and sealed under two strict architectural stability laws: 1) Strict Device Isolation (local device data buffering before transmission to protect decentralized regional cloud cluster server networks from high-traffic spikes). 2) Hardcoded Offline Safety Nets (300+ dog breed directory index matrices, multi-agency emergency speed-dials, and map coordinates are 100% hardcoded in the app download package for complete offline capability in outback blackspots). System contains automated Local Sharding privacy shields, Radius Sighting Consolidation filters, Dynamic Crowd Ratio 30% alert mechanisms, and battery-drain Deadman Check-Out safeguards. Fully prepared to advance to Step 2: User Experience and Interface Design.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genevieve App</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f4f6f9;
+            color: #1e293b;
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo {
+            font-size: 42px;
+            margin: 0;
+        }
+        .app-name {
+            font-size: 24px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin: 5px 0;
+        }
+        .slogan {
+            font-size: 14px;
+            font-style: italic;
+            color: #64748b;
+        }
+        .emergency-slider {
+            width: 100%;
+            max-width: 400px;
+            background-color: #ef4444;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            border-radius: 12px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+        .status-badge {
+            background-color: #22c55e;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="logo">♾️🌳</div>
+        <div class="app-name">GENEVIEVE</div>
+        <div class="slogan">Safety from roots to every journey.</div>
+        <div id="network-status" class="status-badge">🟢 Live Data Active</div>
+    </div>
+
+    <div class="emergency-slider" onclick="triggerEmergency()">
+        🚨 EMERGENCY SERVICES LINK
+    </div>
+
+    <script>
+        function updateNetworkStatus() {
+            const statusBadge = document.getElementById('network-status');
+            if (navigator.onLine) {
+                statusBadge.innerText = "🟢 Live Data Active";
+                statusBadge.style.backgroundColor = "#22c55e";
+            } else {
+                statusBadge.innerText = "⚠️ Offline Protection Grid Engaged";
+                statusBadge.style.backgroundColor = "#f59e0b";
+            }
+        }
+        window.addEventListener('online', updateNetworkStatus);
+        window.addEventListener('offline', updateNetworkStatus);
+        updateNetworkStatus();
+
+        function triggerEmergency() {
+            alert("Dialing Emergency Response Arrays (000 / Poisons Control Hotline)...");
+        }
+    </script>
+</body>
+</html>
