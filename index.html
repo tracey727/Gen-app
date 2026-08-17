@@ -10,7 +10,7 @@
             background-color: #f4f6f9;
             color: #1e293b;
             margin: 0;
-            padding: 16px;
+            padding: 16px 16px 80px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,59 +19,92 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .logo {
-            font-size: 42px;
-            margin: 0;
-        }
-        .app-name {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            margin: 5px 0;
-        }
-        .slogan {
-            font-size: 14px;
-            font-style: italic;
-            color: #64748b;
-        }
-        .emergency-slider {
-            width: 100%;
-            max-width: 400px;
-            background-color: #ef4444;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            border-radius: 12px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            cursor: pointer;
-        }
+        .logo { font-size: 42px; margin: 0; }
+        .app-name { font-size: 24px; font-weight: 800; letter-spacing: 1px; margin: 5px 0; }
+        .slogan { font-size: 14px; font-style: italic; color: #64748b; }
         .status-badge {
-            background-color: #22c55e;
-            color: white;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-top: 10px;
-            display: inline-block;
+            background-color: #22c55e; color: white; padding: 6px 12px;
+            border-radius: 20px; font-size: 12px; font-weight: bold; margin-top: 10px; display: inline-block;
         }
+        .app-screen { display: none; width: 100%; max-width: 400px; margin-top: 15px; }
+        .active-screen { display: block; }
+        .emergency-slider {
+            width: 100%; background-color: #ef4444; color: white; text-align: center;
+            padding: 15px; border-radius: 12px; font-weight: bold; margin-bottom: 20px; cursor: pointer; box-sizing: border-box;
+        }
+        .nav-bar {
+            position: fixed; bottom: 0; left: 0; right: 0; background-color: white;
+            display: flex; justify-content: space-around; padding: 12px 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        .nav-btn {
+            background: none; border: none; font-size: 12px; font-weight: bold; color: #64748b; cursor: pointer;
+        }
+        .nav-btn.active { color: #3b82f6; }
+        .form-group { margin-bottom: 15px; width: 100%; }
+        label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="logo">♾️🌳</div>
-        <div class="app-name">GENEVIEVE</div>
-        <div class="slogan">Safety from roots to every journey.</div>
-        <div id="network-status" class="status-badge">🟢 Live Data Active</div>
+    <!-- SCREEN 1: THE TODAY DASHBOARD -->
+    <div id="screen-today" class="app-screen active-screen">
+        <div class="header">
+            <div class="logo">♾️🌳</div>
+            <div class="app-name">GENEVIEVE</div>
+            <div class="slogan">Safety from roots to every journey.</div>
+            <div id="network-status" class="status-badge">🟢 Live Data Active</div>
+        </div>
+        <div class="emergency-slider" onclick="triggerEmergency()">🚨 EMERGENCY SERVICES LINK</div>
     </div>
 
-    <div class="emergency-slider" onclick="triggerEmergency()">
-        🚨 EMERGENCY SERVICES LINK
+    <!-- SCREEN 3: DOG PROFILE SETUP -->
+    <div id="screen-dog" class="app-screen">
+        <h2>🐶 Dog Profile Setup</h2>
+        <div class="form-group">
+            <label>Dog Name</label>
+            <input type="text" placeholder="Enter dog name...">
+        </div>
+        <div class="form-group">
+            <label>Select Breed</label>
+            <select>
+                <option>Kelpie</option>
+                <option>Border Collie</option>
+                <option>Labrador Retriever</option>
+                <option>Staffordshire Bull Terrier</option>
+                <option>French Bulldog (Flat-Faced Warning Alerted)</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- SCREEN 4: HANDLER INFO & EMERGENCY -->
+    <div id="screen-handler" class="app-screen">
+        <h2>👤 Handler Settings</h2>
+        <div class="form-group">
+            <label>Owner Full Name</label>
+            <input type="text" placeholder="Your name...">
+        </div>
+        <div class="form-group">
+            <label>Emergency ICE Phone Number</label>
+            <input type="tel" placeholder="0400 000 000">
+        </div>
+    </div>
+
+    <!-- MAIN BOTTOM NAVIGATION DOCK -->
+    <div class="nav-bar">
+        <button id="btn-today" class="nav-btn active" onclick="switchScreen('today')">🏠 Today</button>
+        <button id="btn-dog" class="nav-btn" onclick="switchScreen('dog')">🐶 Dog Setup</button>
+        <button id="btn-handler" class="nav-btn" onclick="switchScreen('handler')">👤 Profile</button>
     </div>
 
     <script>
+        function switchScreen(screenId) {
+            document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active-screen'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('screen-' + screenId).classList.add('active-screen');
+            document.getElementById('btn-' + screenId).classList.add('active');
+        }
+
         function updateNetworkStatus() {
             const statusBadge = document.getElementById('network-status');
             if (navigator.onLine) {
